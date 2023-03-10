@@ -17,7 +17,7 @@ pipeline {
         
         stage ("terraform init") {
             steps {
-                sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
+                sh 'terraform workspace new ${environment}'
                 sh 'terraform init -input=false'
             
                 sh "terraform plan -input=false -out tfplan "
