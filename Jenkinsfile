@@ -10,16 +10,16 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/safayetjamil647/jenkins-aws-node-docker-ecs']]])            
+            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/LZIEMI/ChallengeDeployment']]])            
 
           }
         }
         
         stage ("terraform init") {
             steps {
-                sh 'terraform init -input=false'
-                sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
-
+                sh 'terraform workspace new ${environment}'
+                sh 'terraform init'
+            
                 sh "terraform plan -input=false -out tfplan "
                 sh 'terraform show -no-color tfplan > tfplan.txt'
             }
@@ -30,10 +30,6 @@ pipeline {
                 sh ('terraform apply -input=false tfplan') 
            }
         }
-        stage ("terraform Destroy") {
-            steps {
-                sh ('terraform destroy -input=false') 
-           }
-        }
+        
     }
 }
