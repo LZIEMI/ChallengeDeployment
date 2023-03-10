@@ -17,9 +17,9 @@ pipeline {
         
         stage ("terraform init") {
             steps {
-                sh 'terraform init -input=false'
                 sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
-
+                sh 'terraform init -input=false'
+            
                 sh "terraform plan -input=false -out tfplan "
                 sh 'terraform show -no-color tfplan > tfplan.txt'
             }
@@ -30,10 +30,6 @@ pipeline {
                 sh ('terraform apply -input=false tfplan') 
            }
         }
-        stage ("terraform Destroy") {
-            steps {
-                sh ('terraform destroy -input=false') 
-           }
-        }
+        
     }
 }
