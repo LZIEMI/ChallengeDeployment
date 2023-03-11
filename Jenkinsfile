@@ -30,7 +30,7 @@ pipeline {
                 sh ('terraform apply -input=false tfplan') 
            }
         }
-        stage ("terraform Action") {
+        stage ("terraform destroy") {
             steps {
                 sh ('terraform destroy -input=false tfplan') 
            }
