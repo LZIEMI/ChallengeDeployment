@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "my_cluster" {
-  name = "app-cluster" # Name your cluster here
+  name = "app_cluster" # Name your cluster here
 }
 resource "aws_ecs_task_definition" "app_task" {
   family                   = "app-frontend-task" # Name your task
@@ -7,7 +7,7 @@ resource "aws_ecs_task_definition" "app_task" {
   [
     {
       "name": "app-frontend-task",
-      "image": "545353233351.dkr.ecr.us-east-1.amazonaws.com/frontend:latest",
+      "image": "545353233351.dkr.ecr.us-east-2.amazonaws.com/frontend:latest",
       "essential": true,
       "portMappings": [
         {
@@ -33,7 +33,7 @@ resource "aws_ecs_task_definition" "app_task_backend" {
   [
     {
       "name": "app-backend-task",
-      "image": "545353233351.dkr.ecr.us-east-1.amazonaws.com/backend:latest",
+      "image": "545353233351.dkr.ecr.us-east-2.amazonaws.com/backend:latest",
       "essential": true,
       "portMappings": [
         {
@@ -80,12 +80,12 @@ resource "aws_default_vpc" "default_vpc" {
 # Provide references to your default subnets
 resource "aws_default_subnet" "default_subnet_a" {
   # Use your own region here but reference to subnet 1a
-  availability_zone = "us-east-2a"
+  availability_zone = "us-east-1a"
 }
 
 resource "aws_default_subnet" "default_subnet_b" {
   # Use your own region here but reference to subnet 1b
-  availability_zone = "us-east-2b"
+  availability_zone = "us-east-1b"
 }
 resource "aws_alb" "application_load_balancer" {
   name               = "load-balancer-dev" #load balancer name
