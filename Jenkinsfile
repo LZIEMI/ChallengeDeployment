@@ -20,7 +20,7 @@ pipeline {
                  script{
                         dir("terraform")
                         {
-                            git "https://github.com/LZIEMI/ChallengeDeployment"
+                            git "https://github.com/LZIEMI/ChallengeDeployment.git"
                         }
                     }
                 }
